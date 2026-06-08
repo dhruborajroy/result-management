@@ -553,7 +553,7 @@ tbody tr { animation: fadeRow 0.2s ease both; }
         </div>
       </div>
       <div class="header-actions">
-        <a class="btn btn-gold" id="dlBtn" href="results_all.json" download>⬇ JSON</a>
+        <a class="btn btn-gold" id="dlBtn" href="https://raw.githubusercontent.com/dhruborajroy/result-management/refs/heads/main/results_all.json" download>⬇ JSON</a>
       </div>
     </div>
   </header>
@@ -696,7 +696,7 @@ let SDIR   = -1;
    ═══════════════════════════════════════ */
 async function boot() {
   try {
-    const resp = await fetch('results_all.json');
+    const resp = await fetch('https://raw.githubusercontent.com/dhruborajroy/result-management/refs/heads/main/results_all.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
 
