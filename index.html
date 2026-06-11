@@ -13,6 +13,25 @@
   --border:#d0dae8; --card:#ffffff;
   --shadow:0 4px 24px rgba(15,27,53,.10); --shadow-lg:0 12px 48px rgba(15,27,53,.18);
 }
+/* ── Footer & Disclaimer ── */
+.site-footer{background:var(--navy);color:rgba(255,255,255,.65);padding:28px 40px;margin-top:30px;font-size:13px;text-align:center;line-height:1.7}
+.site-footer .ft-name{color:var(--gold2);font-weight:600}
+.site-footer a{color:var(--gold2);text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+.site-footer .ft-links{margin-top:6px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.site-footer .ft-disclaimer-link{margin-top:10px;font-size:12px}
+.site-footer .ft-disclaimer-link button{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);font-size:11px;padding:4px 12px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.site-footer .ft-disclaimer-link button:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.disclaimer-overlay{position:fixed;inset:0;background:rgba(15,27,53,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.disclaimer-overlay.open{display:flex}
+.disclaimer-box{background:var(--card);border-radius:12px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);padding:28px 30px}
+.disclaimer-box h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:22px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.disclaimer-box p{font-size:13.5px;line-height:1.7;color:var(--text);margin-bottom:12px}
+.disclaimer-box .disc-actions{margin-top:18px;text-align:right}
+.disclaimer-box .disc-actions button{background:var(--navy);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer}
+.disclaimer-box .disc-actions button:hover{background:var(--ink)}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
@@ -322,6 +341,37 @@ table.main-t td{padding:11px 15px;font-size:13.5px;vertical-align:middle}
     </table>
   </div>
 </main>
+</div>
+
+<footer class="site-footer">
+  <div>Developed by <span class="ft-name">Dhrubo</span> · Dept. of Civil Engineering, Barishal Engineering College</div>
+  <div class="ft-links">
+    <span>Missing data or batch info? Contact:</span>
+    <a href="mailto:Dhruborajroy3@gmail.com">Dhruborajroy3@gmail.com</a>
+    <span>|</span>
+    <a href="https://thedhrubo.xyz" target="_blank" rel="noopener">thedhrubo.xyz</a>
+  </div>
+  <div class="ft-disclaimer-link">
+    <button onclick="document.getElementById('disclaimerOverlay').classList.add('open');document.body.style.overflow='hidden'">View Disclaimer</button>
+  </div>
+  <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.4);max-width:700px;margin-left:auto;margin-right:auto;">
+    Disclaimer: This website is not an official DUCMC or University of Dhaka platform. Result data is provided for informational purposes only. Users should verify all information from the official DUCMC website. DUCMC and the University of Dhaka reserve the right to modify or correct any result or academic information at any time.
+  </div>
+</footer>
+
+<!-- Disclaimer Modal -->
+<div class="disclaimer-overlay" id="disclaimerOverlay">
+  <div class="disclaimer-box">
+    <h2>⚠ Disclaimer</h2>
+    <p>This result portal is an independent, unofficial platform developed solely for educational and informational purposes. The examination results displayed here are collected from publicly available sources and may not always reflect the most recent updates or corrections.</p>
+    <p>This website is not affiliated with, endorsed by, or operated by the University of Dhaka, DUCMC (Dhaka University Constituent Colleges), or any of its constituent institutions.</p>
+    <p>Users are strongly advised to verify all academic information, examination results, and official notices through the official DUCMC portal and relevant authorities. The developer assumes no responsibility for any errors, omissions, delays, or discrepancies in the displayed data.</p>
+    <p>DUCMC and the University of Dhaka reserve the right to modify, update, correct, or withdraw any result or academic information at any time without prior notice.</p>
+    <p>By using this website, you acknowledge and agree that the information provided is for reference only and should not be considered an official academic record.</p>
+    <div class="disc-actions">
+      <button onclick="document.getElementById('disclaimerOverlay').classList.remove('open');document.body.style.overflow='';localStorage.setItem('disclaimerSeen','1')">I Understand</button>
+    </div>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -652,6 +702,12 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
 // ════ INIT ════
 initSearch();
+
+// ════ DISCLAIMER (first visit) ════
+if(!localStorage.getItem('disclaimerSeen')){
+  document.getElementById('disclaimerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 </script>
 </body>
 </html>
